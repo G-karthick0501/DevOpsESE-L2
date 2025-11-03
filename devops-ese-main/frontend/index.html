@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BookHub</title>
+</head>
+<body>
+    <h1>BookHub - Book List</h1>
+    <div id="books"></div>
+    
+    <script>
+        const API_URL = '/api';
+        
+        fetch(API_URL + '/books')
+            .then(res => res.json())
+            .then(books => {
+                const div = document.getElementById('books');
+                if(books.length === 0) {
+                    div.innerHTML = '<p>No books found</p>';
+                } else {
+                    div.innerHTML = books.map(b => 
+                        `<p>${b.title} by ${b.author}</p>`
+                    ).join('');
+                }
+            });
+    </script>
+</body>
+</html>
